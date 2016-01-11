@@ -3,15 +3,12 @@
 namespace CoreShopCod;
 
 use CoreShop\Model\Cart;
-use CoreShop\Model\Order;
 use CoreShop\Model\Plugin\Payment as CorePayment;
 use CoreShop\Plugin as CorePlugin;
 use CoreShop\Tool;
 
 class Shop extends CorePayment
 {
-    public static $install;
-
     /**
      * Attach Events for CoreShop
      *
@@ -21,20 +18,6 @@ class Shop extends CorePayment
     {
         CorePlugin::getEventManager()->attach("payment.getProvider", function($e) {
             return $this;
-        });
-
-        CorePlugin::getEventManager()->attach('controller.init', function($e) {
-            $controller = $e->getTarget();
-            
-            $controller->view->setScriptPath(
-                array_merge(
-                    $controller->view->getScriptPaths(),
-                    array(
-                        PIMCORE_PLUGINS_PATH . '/CoreShopCod/views/scripts/',
-                        CORESHOP_TEMPLATE_PATH . '/views/scripts/coreshopcod/'
-                    )
-                )
-            );
         });
     }
 
@@ -75,7 +58,7 @@ class Shop extends CorePayment
      */
     public function getIdentifier()
     {
-        return "payment_cod";
+        return "CoreShopCod";
     }
 
     /**
@@ -88,26 +71,44 @@ class Shop extends CorePayment
     {
         return 0;
     }
+    /**
+     * Process Validation for Payment
+     *
+     * @param Cart $cart
+     * @return mixed
+     */
+    public function process(Cart $cart) {
+        return $this->getProcessValidationUrl();
+    }
+
+    public function processPaymentReturn() {
+
+    }
 
     /**
-     * Process CoreShop Payment
+     * Get url for confirmation link
      *
-     * @param Order $order
      * @return string
      */
-    public function processPayment(Order $order)
-    {
-        $coreShopPayment = $order->createPayment($this, $order->getTotal());
+    public function getConfirmationUrl() {
+        return $this->url($this->getIdentifier(), 'confirmation');
+    }
 
-        $this->validateOrder($coreShopPayment, $order, \CoreShop\Model\OrderState::getById(\CoreShop\Config::getValue("ORDERSTATE.COD")));
+    /**
+     * get url for validation link
+     *
+     * @return string
+     */
+    public function getProcessValidationUrl() {
+        return $this->url($this->getIdentifier(), 'validate');
+    }
 
-        Tool::prepareCart();
-        $session = Tool::getSession();
-
-        unset($session->order);
-        unset($session->cart);
-        unset($session->cartId);
-
-        return "coreshopcod/cod";
+    /**
+     * get url payment link
+     *
+     * @return string
+     */
+    public function getPaymentUrl() {
+        return $this->url($this->getIdentifier(), 'payment');
     }
 }
