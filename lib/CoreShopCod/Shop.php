@@ -102,6 +102,12 @@ class Shop extends CorePayment
         $carrier = $cart->getCarrier();
 
         if(Configuration::get("COD.CARRIER.PRICE." . $carrier->getId())) {
+            $taxCalculator = $carrier->getTaxCalculator();
+
+            if($taxCalculator) {
+                return $taxCalculator->addTaxes(Configuration::get("COD.CARRIER.PRICE." . $carrier->getId()));
+            }
+
             return Configuration::get("COD.CARRIER.PRICE." . $carrier->getId());
         }
 
