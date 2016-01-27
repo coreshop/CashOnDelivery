@@ -71,6 +71,27 @@ class Plugin extends AbstractPlugin implements PluginInterface
     {
 
     }
+
+    /**
+     * @return string
+     */
+    public static function getTranslationFileDirectory()
+    {
+        return PIMCORE_PLUGINS_PATH . '/CoreShopCod/static/texts';
+    }
+
+    /**
+     * @param string $language
+     * @return string path to the translation file relative to plugin directory
+     */
+    public static function getTranslationFile($language)
+    {
+        if (is_file(self::getTranslationFileDirectory() . "/$language.csv")) {
+            return "/CoreShopCod/static/texts/$language.csv";
+        } else {
+            return '/CoreShopCod/static/texts/en.csv';
+        }
+    }
 }
 
 

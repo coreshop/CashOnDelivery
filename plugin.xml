@@ -13,5 +13,12 @@
         <pluginNamespaces>
             <namespace>CoreShopCod</namespace>
         </pluginNamespaces>
+        <pluginJsPaths-extjs6>
+            <path>/plugins/CoreShopCod/static/js/cod.js</path>
+            <path>/plugins/CoreShopCod/static/js/settings.js</path>
+        </pluginJsPaths-extjs6>
+        <pluginCssPaths-extjs6>
+            <path>/plugins/CoreShopCod/static/css/cod.css</path>
+        </pluginCssPaths-extjs6>
     </plugin>
 </zend-config>

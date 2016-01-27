@@ -14,10 +14,13 @@
 
 namespace CoreShopCod;
 
-use CoreShop\Model\Cart;
+use CoreShop\Model\Configuration;
 use CoreShop\Model\Plugin\Payment as CorePayment;
 use CoreShop\Plugin as CorePlugin;
 use CoreShop\Tool;
+
+use CoreShop\Model\Cart;
+use Pimcore\Model\Object\CoreShopCart;
 
 class Shop extends CorePayment
 {
@@ -74,6 +77,21 @@ class Shop extends CorePayment
     }
 
     /**
+     * @param Cart $cart
+     * @returns boolean
+     */
+    public function isAvailable(Cart $cart)
+    {
+        $carrier = $cart->getCarrier();
+
+        if(Configuration::get("COD.CARRIER.ACTIVE." . $carrier->getId())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Get Payment Fee
      *
      * @param Cart $cart
@@ -81,6 +99,12 @@ class Shop extends CorePayment
      */
     public function getPaymentFee(Cart $cart)
     {
+        $carrier = $cart->getCarrier();
+
+        if(Configuration::get("COD.CARRIER.PRICE." . $carrier->getId())) {
+            return Configuration::get("COD.CARRIER.PRICE." . $carrier->getId());
+        }
+
         return 0;
     }
     /**
