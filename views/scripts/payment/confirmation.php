@@ -1,7 +1,9 @@
 <div class="container shop checkout checkout-step-5">
     <?=$this->partial("coreshop/helper/order-steps.php", array("step" => 5));?>
 
-    <p>Ihre Bestellung wurde aufgegeben. Sie haben Cash on Delivery als Zahlungsoption ausgewählt. Wir werden Ihre Bestellung nun verarbeiten.</p>
-    <p>Als Zahlungsreferenz geben Sie <?=$this->order->getOrderNumber()?> an</p>
-
+    <p>
+        <?php
+            echo sprintf($this->translate("Your Order has been submitted. You have choosen to by with Cash on Delivery. Your order is now preparing. Your Order Number is %s"), $this->order->getOrderNumber())
+        ?>
+    </p>
 </div>

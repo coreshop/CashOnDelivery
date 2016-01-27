@@ -8,7 +8,7 @@
                 <h3 class="panel-title"><?=$this->translate("Cash on Delivery")?></h3>
             </div>
             <div class="panel-body delivery-options">
-                <p><?=sprintf($this->translate("Wollen Sie den Betrag von %s per Cash on Delivery bezahlen", \CoreShop\Tool::formatPrice($this->cart->getTotal())))?></p>
+                <p><?=sprintf($this->translate("Do you want to pay the amount %s with Cash on Delivery?", \CoreShop\Tool::formatPrice($this->cart->getTotal())))?></p>
 
                 <div class="row">
                     <div class="col-xs-12">
