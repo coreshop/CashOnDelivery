@@ -13,15 +13,15 @@
  */
 
 use CoreShop\Model;
-
 use Pimcore\Model\Object\CoreShopPayment;
 
 class CoreShopCod_AdminController extends \CoreShop\Plugin\Controller\Admin
 {
-    public function getAction() {
+    public function getAction()
+    {
         $config = new Model\Configuration\Listing();
-        $config->setFilter(function($entry) {
-            if(startsWith($entry['key'], "COD.")) {
+        $config->setFilter(function ($entry) {
+            if (startsWith($entry['key'], "COD.")) {
                 return true;
             }
 
@@ -30,7 +30,7 @@ class CoreShopCod_AdminController extends \CoreShop\Plugin\Controller\Admin
 
         $valueArray = array();
 
-        foreach($config->getConfigurations() as $c) {
+        foreach ($config->getConfigurations() as $c) {
             $valueArray[$c->getKey()] = $c->getData();
         }
 
@@ -48,7 +48,7 @@ class CoreShopCod_AdminController extends \CoreShop\Plugin\Controller\Admin
 
         $values = array_htmlspecialchars($values);
 
-        foreach($values as $key => $value) {
+        foreach ($values as $key => $value) {
             Model\Configuration::set($key, $value);
         }
 

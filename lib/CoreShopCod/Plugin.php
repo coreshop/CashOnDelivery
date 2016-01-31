@@ -39,8 +39,9 @@ class Plugin extends AbstractPlugin implements PluginInterface
     /**
      * @return \CoreShopCod\Shop
      */
-    public static function getShop() {
-        if(!self::$shop) {
+    public static function getShop()
+    {
+        if (!self::$shop) {
             self::$shop = new Shop();
         }
         return self::$shop;
@@ -61,7 +62,6 @@ class Plugin extends AbstractPlugin implements PluginInterface
      */
     public static function install()
     {
-
     }
 
     /**
@@ -69,7 +69,6 @@ class Plugin extends AbstractPlugin implements PluginInterface
      */
     public static function uninstall()
     {
-
     }
 
     /**
@@ -93,5 +92,3 @@ class Plugin extends AbstractPlugin implements PluginInterface
         }
     }
 }
-
-

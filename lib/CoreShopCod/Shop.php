@@ -18,7 +18,6 @@ use CoreShop\Model\Configuration;
 use CoreShop\Model\Plugin\Payment as CorePayment;
 use CoreShop\Plugin as CorePlugin;
 use CoreShop\Tool;
-
 use CoreShop\Model\Cart;
 use Pimcore\Model\Object\CoreShopCart;
 
@@ -31,7 +30,7 @@ class Shop extends CorePayment
      */
     public function attachEvents()
     {
-        CorePlugin::getEventManager()->attach("payment.getProvider", function($e) {
+        CorePlugin::getEventManager()->attach("payment.getProvider", function ($e) {
             return $this;
         });
     }
@@ -84,7 +83,7 @@ class Shop extends CorePayment
     {
         $carrier = $cart->getCarrier();
 
-        if(Configuration::get("COD.CARRIER.ACTIVE." . $carrier->getId())) {
+        if (Configuration::get("COD.CARRIER.ACTIVE." . $carrier->getId())) {
             return true;
         }
 
@@ -101,10 +100,10 @@ class Shop extends CorePayment
     {
         $carrier = $cart->getCarrier();
 
-        if(Configuration::get("COD.CARRIER.PRICE." . $carrier->getId())) {
+        if (Configuration::get("COD.CARRIER.PRICE." . $carrier->getId())) {
             $taxCalculator = $carrier->getTaxCalculator();
 
-            if($taxCalculator) {
+            if ($taxCalculator) {
                 return $taxCalculator->addTaxes(Configuration::get("COD.CARRIER.PRICE." . $carrier->getId()));
             }
 
@@ -119,12 +118,13 @@ class Shop extends CorePayment
      * @param Cart $cart
      * @return mixed
      */
-    public function process(Cart $cart) {
+    public function process(Cart $cart)
+    {
         return $this->getProcessValidationUrl();
     }
 
-    public function processPaymentReturn() {
-
+    public function processPaymentReturn()
+    {
     }
 
     /**
@@ -132,7 +132,8 @@ class Shop extends CorePayment
      *
      * @return string
      */
-    public function getConfirmationUrl() {
+    public function getConfirmationUrl()
+    {
         return $this->url($this->getIdentifier(), 'confirmation');
     }
 
@@ -141,7 +142,8 @@ class Shop extends CorePayment
      *
      * @return string
      */
-    public function getProcessValidationUrl() {
+    public function getProcessValidationUrl()
+    {
         return $this->url($this->getIdentifier(), 'validate');
     }
 
@@ -150,7 +152,8 @@ class Shop extends CorePayment
      *
      * @return string
      */
-    public function getPaymentUrl() {
+    public function getPaymentUrl()
+    {
         return $this->url($this->getIdentifier(), 'payment');
     }
 }

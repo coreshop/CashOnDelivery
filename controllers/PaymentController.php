@@ -14,7 +14,6 @@
 
 use CoreShop\Controller\Action\Payment;
 use Pimcore\Model\Object\CoreShopPayment;
-
 use CoreShop\Tool;
 
 class CoreShopCod_PaymentController extends Payment
