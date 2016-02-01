@@ -1,6 +1,6 @@
 <?php
 /**
- * CoreShopCod
+ * CashOnDelivery
  *
  * LICENSE
  *
@@ -12,7 +12,7 @@
  * @license    http://www.coreshop.org/license     GNU General Public License version 3 (GPLv3)
  */
 
-namespace CoreShopCod;
+namespace CashOnDelivery;
 
 use Pimcore\API\Plugin\AbstractPlugin;
 use Pimcore\API\Plugin\PluginInterface;
@@ -37,7 +37,7 @@ class Plugin extends AbstractPlugin implements PluginInterface
     }
 
     /**
-     * @return \CoreShopCod\Shop
+     * @return \CashOnDelivery\Shop
      */
     public static function getShop()
     {
@@ -76,7 +76,7 @@ class Plugin extends AbstractPlugin implements PluginInterface
      */
     public static function getTranslationFileDirectory()
     {
-        return PIMCORE_PLUGINS_PATH . '/CoreShopCod/static/texts';
+        return PIMCORE_PLUGINS_PATH . '/CashOnDelivery/static/texts';
     }
 
     /**
@@ -86,9 +86,9 @@ class Plugin extends AbstractPlugin implements PluginInterface
     public static function getTranslationFile($language)
     {
         if (is_file(self::getTranslationFileDirectory() . "/$language.csv")) {
-            return "/CoreShopCod/static/texts/$language.csv";
+            return "/CashOnDelivery/static/texts/$language.csv";
         } else {
-            return '/CoreShopCod/static/texts/en.csv';
+            return '/CashOnDelivery/static/texts/en.csv';
         }
     }
 }

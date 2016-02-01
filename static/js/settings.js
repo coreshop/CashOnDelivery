@@ -1,5 +1,5 @@
 /**
- * CoreShopCod
+ * CashOnDelivery
  *
  * LICENSE
  *
@@ -20,7 +20,7 @@ pimcore.plugin.coreshop.cod.settings = Class.create({
 
     getData: function () {
         Ext.Ajax.request({
-            url: "/plugin/CoreShopCod/admin/get",
+            url: "/plugin/CashOnDelivery/admin/get",
             success: function (response)
             {
                 this.data = Ext.decode(response.responseText);
@@ -134,7 +134,7 @@ pimcore.plugin.coreshop.cod.settings = Class.create({
         var values = this.layout.getForm().getFieldValues();
 
         Ext.Ajax.request({
-            url: "/plugin/CoreShopCod/admin/set",
+            url: "/plugin/CashOnDelivery/admin/set",
             method: "post",
             params: {
                 data: Ext.encode(values)

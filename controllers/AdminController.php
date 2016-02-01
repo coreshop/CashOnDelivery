@@ -1,6 +1,6 @@
 <?php
 /**
- * CoreShopCod
+ * CashOnDelivery
  *
  * LICENSE
  *
@@ -15,7 +15,7 @@
 use CoreShop\Model;
 use Pimcore\Model\Object\CoreShopPayment;
 
-class CoreShopCod_AdminController extends \CoreShop\Plugin\Controller\Admin
+class CashOnDelivery_AdminController extends \CoreShop\Plugin\Controller\Admin
 {
     public function getAction()
     {

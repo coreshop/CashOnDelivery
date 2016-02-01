@@ -1,5 +1,5 @@
 /**
- * CoreShopCod
+ * CashOnDelivery
  *
  * LICENSE
  *

@@ -1,6 +1,6 @@
 <?php
 /**
- * CoreShopCod
+ * CashOnDelivery
  *
  * LICENSE
  *
@@ -16,7 +16,7 @@ use CoreShop\Controller\Action\Payment;
 use Pimcore\Model\Object\CoreShopPayment;
 use CoreShop\Tool;
 
-class CoreShopCod_PaymentController extends Payment
+class CashOnDelivery_PaymentController extends Payment
 {
     /**
      * User accepted Bankwire Payment -> createOrder
@@ -30,7 +30,7 @@ class CoreShopCod_PaymentController extends Payment
     }
 
     /**
-     * @return CoreShopCod\Shop
+     * @return CashOnDelivery\Shop
      */
     public function getModule()
     {

@@ -1,6 +1,6 @@
 <?php
 /**
- * CoreShopCod
+ * CashOnDelivery
  *
  * LICENSE
  *
@@ -12,7 +12,7 @@
  * @license    http://www.coreshop.org/license     GNU General Public License version 3 (GPLv3)
  */
 
-namespace CoreShopCod;
+namespace CashOnDelivery;
 
 use CoreShop\Model\Configuration;
 use CoreShop\Model\Plugin\Payment as CorePayment;
@@ -62,7 +62,7 @@ class Shop extends CorePayment
      */
     public function getImage()
     {
-        return "/plugins/CoreShopCod/static/img/cod.gif";
+        return "/plugins/CashOnDelivery/static/img/cod.gif";
     }
 
     /**
@@ -72,7 +72,7 @@ class Shop extends CorePayment
      */
     public function getIdentifier()
     {
-        return "CoreShopCod";
+        return "CashOnDelivery";
     }
 
     /**

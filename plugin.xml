@@ -1,24 +1,24 @@
 <?xml version="1.0"?>
 <zend-config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
     <plugin>
-        <pluginName>CoreShopCod</pluginName>
+        <pluginName>CashOnDelivery</pluginName>
         <pluginDescription><![CDATA[Cash on Delivery Plugin for CoreShop]]></pluginDescription>
         <pluginVersion>1.0</pluginVersion>
         <pluginRevision>1</pluginRevision>
         <pluginBuildTimestamp>0</pluginBuildTimestamp>
-        <pluginClassName>\CoreShopCod\Plugin</pluginClassName>
+        <pluginClassName>\CashOnDelivery\Plugin</pluginClassName>
         <pluginIncludePaths>
-            <path>/CoreShopCod/lib</path>
+            <path>/CashOnDelivery/lib</path>
         </pluginIncludePaths>
         <pluginNamespaces>
-            <namespace>CoreShopCod</namespace>
+            <namespace>CashOnDelivery</namespace>
         </pluginNamespaces>
         <pluginJsPaths-extjs6>
-            <path>/plugins/CoreShopCod/static/js/cod.js</path>
-            <path>/plugins/CoreShopCod/static/js/settings.js</path>
+            <path>/plugins/CashOnDelivery/static/js/cod.js</path>
+            <path>/plugins/CashOnDelivery/static/js/settings.js</path>
         </pluginJsPaths-extjs6>
         <pluginCssPaths-extjs6>
-            <path>/plugins/CoreShopCod/static/css/cod.css</path>
+            <path>/plugins/CashOnDelivery/static/css/cod.css</path>
         </pluginCssPaths-extjs6>
     </plugin>
 </zend-config>
