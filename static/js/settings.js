@@ -11,8 +11,8 @@
  * @license    http://www.coreshop.org/license     GNU General Public License version 3 (GPLv3)
  */
 
-pimcore.registerNS("pimcore.plugin.coreshop.cod.settings");
-pimcore.plugin.coreshop.cod.settings = Class.create({
+pimcore.registerNS("pimcore.plugin.cod.settings");
+pimcore.plugin.cod.settings = Class.create({
 
     initialize: function () {
         this.getData();

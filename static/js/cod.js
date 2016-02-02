@@ -11,40 +11,41 @@
  * @license    http://www.coreshop.org/license     GNU General Public License version 3 (GPLv3)
  */
 
-pimcore.registerNS("pimcore.plugin.coreshop.cod");
+$(document).on("coreShopReady", function() {
+    pimcore.registerNS("pimcore.plugin.cod.plugin");
 
-pimcore.plugin.coreshop.cod = Class.create(coreshop.plugin.admin, {
+    pimcore.plugin.cod.plugin = Class.create(coreshop.plugin.admin, {
 
-    getClassName: function() {
-        return "pimcore.plugin.coreshop.cod";
-    },
+        getClassName: function () {
+            return "pimcore.plugin.cod";
+        },
 
-    initialize: function() {
-        coreshop.plugin.broker.registerPlugin(this);
-    },
+        initialize: function () {
+            coreshop.plugin.broker.registerPlugin(this);
+        },
 
-    uninstall: function() {
-        //TODO remove from menu
-    },
+        uninstall: function () {
+            //TODO remove from menu
+        },
 
-    coreshopReady: function (coreshop, broker) {
-        coreshop.addPluginMenu({
-            text: t("coreshop_cod"),
-            iconCls: "coreshop_icon_cod",
-            handler: this.openCod
-        });
-    },
+        coreshopReady: function (coreshop, broker) {
+            coreshop.addPluginMenu({
+                text: t("coreshop_cod"),
+                iconCls: "coreshop_icon_cod",
+                handler: this.openCod
+            });
+        },
 
-    openCod : function()
-    {
-        try {
-            pimcore.globalmanager.get("coreshop_cod").activate();
-        }
-        catch (e) {
-            //console.log(e);
-            pimcore.globalmanager.add("coreshop_cod", new pimcore.plugin.coreshop.cod.settings());
-        }
-    },
+        openCod: function () {
+            try {
+                pimcore.globalmanager.get("coreshop_cod").activate();
+            }
+            catch (e) {
+                //console.log(e);
+                pimcore.globalmanager.add("coreshop_cod", new pimcore.plugin.cod.settings());
+            }
+        },
+    });
+
+    new pimcore.plugin.cod.plugin();
 });
-
-new pimcore.plugin.coreshop.cod();
