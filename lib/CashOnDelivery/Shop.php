@@ -99,19 +99,53 @@ class Shop extends CorePayment
     public function getPaymentFee(Cart $cart)
     {
         $carrier = $cart->getCarrier();
+        $fee = $this->getPaymentFeeForCart($cart);
+
+        $taxCalculator = $carrier->getTaxCalculator($cart->getCustomerShippingAddress());
+
+        if ($taxCalculator) {
+            return $taxCalculator->addTaxes($fee);
+        }
+
+        return $fee;
+    }
+
+    /**
+     * get payment taxes
+     *
+     * @param Cart $cart
+     * @return float
+     */
+    public function getPaymentFeeTaxes(Cart $cart)
+    {
+        $carrier = $cart->getCarrier();
+        $fee = $this->getPaymentFeeForCart($cart);
+
+        $taxCalculator = $carrier->getTaxCalculator($cart->getCustomerShippingAddress());
+
+        if ($taxCalculator) {
+            return $taxCalculator->getTaxesAmount($fee);
+        }
+
+        return $fee;
+    }
+
+    /**
+     * get payment fee
+     *
+     * @param Cart $cart
+     * @return float
+     */
+    private function getPaymentFeeForCart(Cart $cart) {
+        $carrier = $cart->getCarrier();
 
         if (Configuration::get("COD.CARRIER.PRICE." . $carrier->getId())) {
-            $taxCalculator = $carrier->getTaxCalculator($cart->getCustomerShippingAddress());
-
-            if ($taxCalculator) {
-                return $taxCalculator->addTaxes(Configuration::get("COD.CARRIER.PRICE." . $carrier->getId()));
-            }
-
             return Configuration::get("COD.CARRIER.PRICE." . $carrier->getId());
         }
 
         return 0;
     }
+
     /**
      * Process Validation for Payment
      *
