@@ -15,7 +15,9 @@ pimcore.registerNS("pimcore.plugin.cod.settings");
 pimcore.plugin.cod.settings = Class.create({
 
     initialize: function () {
-        this.getData();
+        pimcore.globalmanager.get("coreshop_carriers").load(this.getData.bind(this));
+
+        //this.getData();
     },
 
     getData: function () {
@@ -38,7 +40,7 @@ pimcore.plugin.cod.settings = Class.create({
             current = this.data.values[key];
         }
 
-        if (typeof current != "object" && typeof current != "array" && typeof current != "function") {
+        if (current != "function") {
             return current;
         }
 
@@ -73,6 +75,7 @@ pimcore.plugin.cod.settings = Class.create({
             var carriers = pimcore.globalmanager.get("coreshop_carriers").getRange();
 
             Ext.each(carriers, function(carrier) {
+
                 var tab = {
                     title: carrier.get("name"),
                     iconCls: "coreshop_icon_carriers",
@@ -89,6 +92,19 @@ pimcore.plugin.cod.settings = Class.create({
                             name: 'COD.CARRIER.PRICE.' + carrier.get('id'),
                             value: me.getValue('COD.CARRIER.PRICE.' + carrier.get('id')),
                             enableKeyEvents: true
+                        },
+                        {
+                            xtype : 'multiselect',
+                            name: 'COD.CARRIER.COUNTRIES.' + carrier.get('id'),
+                            triggerAction: "all",
+                            displayField:'name',
+                            valueField:'id',
+                            editable: false,
+                            queryMode: 'local',
+                            height : 200,
+                            fieldLabel: t('coreshop_cod_countries'),
+                            store: pimcore.globalmanager.get("coreshop_countries"),
+                            value : me.getValue('COD.CARRIER.COUNTRIES.' + carrier.get('id'))
                         }
                     ]
                 };

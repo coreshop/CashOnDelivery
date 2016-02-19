@@ -20,6 +20,7 @@ use CoreShop\Plugin as CorePlugin;
 use CoreShop\Tool;
 use CoreShop\Model\Cart;
 use Pimcore\Model\Object\CoreShopCart;
+use Pimcore\Model\Tool\CustomReport\Config;
 
 class Shop extends CorePayment
 {
@@ -84,7 +85,17 @@ class Shop extends CorePayment
         $carrier = $cart->getCarrier();
 
         if (Configuration::get("COD.CARRIER.ACTIVE." . $carrier->getId())) {
-            return true;
+            if($cart->getCustomerShippingAddress()) {
+                $country = $cart->getCustomerShippingAddress()->getCountry();
+
+                $availableCountries = Configuration::get("COD.CARRIER.COUNTRIES." . $carrier->getId());
+
+                foreach($availableCountries as $countryId) {
+                    if(intval($countryId) === intval($country->getId())) {
+                        return true;
+                    }
+                }
+            }
         }
 
         return false;
