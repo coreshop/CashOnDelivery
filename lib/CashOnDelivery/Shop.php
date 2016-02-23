@@ -90,9 +90,11 @@ class Shop extends CorePayment
 
                 $availableCountries = Configuration::get("COD.CARRIER.COUNTRIES." . $carrier->getId());
 
-                foreach($availableCountries as $countryId) {
-                    if(intval($countryId) === intval($country->getId())) {
-                        return true;
+                if(is_array($availableCountries)) {
+                    foreach ($availableCountries as $countryId) {
+                        if (intval($countryId) === intval($country->getId())) {
+                            return true;
+                        }
                     }
                 }
             }
