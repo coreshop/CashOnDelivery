@@ -109,15 +109,17 @@ class Shop extends CorePayment
      * @param Cart $cart
      * @return int
      */
-    public function getPaymentFee(Cart $cart)
+    public function getPaymentFee(Cart $cart, $useTaxes = true)
     {
         $carrier = $cart->getCarrier();
         $fee = $this->getPaymentFeeForCart($cart);
 
-        $taxCalculator = $carrier->getTaxCalculator($cart->getCustomerShippingAddress());
+        if($useTaxes) {
+            $taxCalculator = $carrier->getTaxCalculator($cart->getCustomerShippingAddress());
 
-        if ($taxCalculator) {
-            return $taxCalculator->addTaxes($fee);
+            if ($taxCalculator) {
+                return $taxCalculator->addTaxes($fee);
+            }
         }
 
         return $fee;
