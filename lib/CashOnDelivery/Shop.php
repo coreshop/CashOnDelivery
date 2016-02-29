@@ -104,6 +104,24 @@ class Shop extends CorePayment
     }
 
     /**
+     * Get Payment Fee Tax Rate
+     *
+     * @param Cart $cart
+     * @return float
+     */
+    public function getPaymentFeeTaxRate(Cart $cart)
+    {
+        $carrier = $cart->getCarrier();
+        $taxCalculator = $carrier->getTaxCalculator($cart->getCustomerShippingAddress());
+
+        if ($taxCalculator) {
+            return $taxCalculator->getTotalRate();
+        }
+
+        return 0;
+    }
+
+    /**
      * Get Payment Fee
      *
      * @param Cart $cart
