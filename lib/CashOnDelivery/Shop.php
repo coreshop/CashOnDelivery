@@ -63,7 +63,7 @@ class Shop extends CorePayment
      */
     public function getImage()
     {
-        return "/plugins/CashOnDelivery/static/img/cod.gif";
+        return "/plugins/CashOnDelivery/static/img/cod.jpg";
     }
 
     /**
