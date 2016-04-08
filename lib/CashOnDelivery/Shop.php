@@ -104,24 +104,6 @@ class Shop extends CorePayment
     }
 
     /**
-     * Get Payment Fee Tax Rate
-     *
-     * @param Cart $cart
-     * @return float
-     */
-    public function getPaymentFeeTaxRate(Cart $cart)
-    {
-        $carrier = $cart->getCarrier();
-        $taxCalculator = $carrier->getTaxCalculator($cart->getCustomerShippingAddress());
-
-        if ($taxCalculator) {
-            return $taxCalculator->getTotalRate();
-        }
-
-        return 0;
-    }
-
-    /**
      * Get Payment Fee
      *
      * @param Cart $cart
@@ -129,11 +111,10 @@ class Shop extends CorePayment
      */
     public function getPaymentFee(Cart $cart, $useTaxes = true)
     {
-        $carrier = $cart->getCarrier();
         $fee = $this->getPaymentFeeForCart($cart);
 
         if($useTaxes) {
-            $taxCalculator = $carrier->getTaxCalculator($cart->getCustomerShippingAddress());
+            $taxCalculator = $this->getTaxCalculator($cart);
 
             if ($taxCalculator) {
                 return $taxCalculator->addTaxes($fee);
@@ -144,23 +125,14 @@ class Shop extends CorePayment
     }
 
     /**
-     * get payment taxes
-     *
      * @param Cart $cart
-     * @return float
+     * @return bool|\CoreShop\Model\TaxCalculator
+     * @throws \CoreShop\Exception\UnsupportedException
      */
-    public function getPaymentFeeTaxes(Cart $cart)
-    {
+    public function getTaxCalculator(Cart $cart) {
         $carrier = $cart->getCarrier();
-        $fee = $this->getPaymentFeeForCart($cart);
 
-        $taxCalculator = $carrier->getTaxCalculator($cart->getCustomerShippingAddress());
-
-        if ($taxCalculator) {
-            return $taxCalculator->getTaxesAmount($fee);
-        }
-
-        return $fee;
+        return $carrier->getTaxCalculator($cart->getCustomerShippingAddress());
     }
 
     /**
