@@ -132,7 +132,7 @@ class Shop extends CorePayment
     public function getTaxCalculator(Cart $cart) {
         $carrier = $cart->getCarrier();
 
-        return $carrier->getTaxCalculator($cart->getCustomerShippingAddress());
+        return $carrier->getTaxCalculator($cart->getCustomerAddressForTaxation());
     }
 
     /**
