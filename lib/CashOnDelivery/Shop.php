@@ -19,7 +19,6 @@ use CoreShop\Model\Plugin\Payment as CorePayment;
 use CoreShop\Plugin as CorePlugin;
 use CoreShop\Tool;
 use CoreShop\Model\Cart;
-use Pimcore\Model\Object\CoreShopCart;
 use Pimcore\Model\Tool\CustomReport\Config;
 
 class Shop extends CorePayment
