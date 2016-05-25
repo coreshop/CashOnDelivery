@@ -23,7 +23,7 @@ class CashOnDelivery_PaymentController extends Payment
     public function paymentAction()
     {
         //DoPayment
-        $this->session->order = $this->getModule()->createOrder($this->cart, \CoreShop\Model\Order\State::getById(\CoreShop\Model\Configuration::get("SYSTEM.ORDERSTATE.COD")), $this->cart->getTotal(), $this->view->language);
+        $this->session->order = $this->cart->createOrder(\CoreShop\Model\Order\State::getById(\CoreShop\Model\Configuration::get("SYSTEM.ORDERSTATE.COD")), $this->getModule(), 0, $this->view->language);
 
         $this->redirect($this->getModule()->getConfirmationUrl());
     }
