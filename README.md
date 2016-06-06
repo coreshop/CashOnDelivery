@@ -12,5 +12,5 @@ Cash on Delivery Plugin for Pimcore
 Install with composer
 
 ```
-composer require coreshop/cash-on-delivery dev-master
+composer require coreshop/cash-on-delivery 1.0
 ```
