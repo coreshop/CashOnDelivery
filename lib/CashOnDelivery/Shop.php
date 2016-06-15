@@ -106,6 +106,8 @@ class Shop extends CorePayment
      * Get Payment Fee
      *
      * @param Cart $cart
+     * @param boolean $useTaxes
+     *
      * @return int
      */
     public function getPaymentFee(Cart $cart, $useTaxes = true)
@@ -159,10 +161,6 @@ class Shop extends CorePayment
     public function process(Cart $cart)
     {
         return $this->getProcessValidationUrl();
-    }
-
-    public function processPaymentReturn()
-    {
     }
 
     /**
