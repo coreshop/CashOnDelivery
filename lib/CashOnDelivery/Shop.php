@@ -17,9 +17,7 @@ namespace CashOnDelivery;
 use CoreShop\Model\Configuration;
 use CoreShop\Model\Plugin\Payment as CorePayment;
 use CoreShop\Plugin as CorePlugin;
-use CoreShop\Tool;
 use CoreShop\Model\Cart;
-use Pimcore\Model\Tool\CustomReport\Config;
 
 /**
  * Class Shop
