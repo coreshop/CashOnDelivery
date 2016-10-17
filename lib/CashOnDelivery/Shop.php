@@ -14,6 +14,7 @@
 
 namespace CashOnDelivery;
 
+use CoreShop\Model\Carrier;
 use CoreShop\Model\Configuration;
 use CoreShop\Model\Plugin\Payment as CorePayment;
 use CoreShop\Plugin as CorePlugin;
@@ -85,16 +86,18 @@ class Shop extends CorePayment
     {
         $carrier = $cart->getCarrier();
 
-        if (Configuration::get("COD.CARRIER.ACTIVE." . $carrier->getId())) {
-            if($cart->getCustomerShippingAddress()) {
-                $country = $cart->getCustomerShippingAddress()->getCountry();
+        if($carrier instanceof Carrier) {
+            if (Configuration::get("COD.CARRIER.ACTIVE." . $carrier->getId())) {
+                if ($cart->getCustomerShippingAddress()) {
+                    $country = $cart->getCustomerShippingAddress()->getCountry();
 
-                $availableCountries = Configuration::get("COD.CARRIER.COUNTRIES." . $carrier->getId());
+                    $availableCountries = Configuration::get("COD.CARRIER.COUNTRIES." . $carrier->getId());
 
-                if(is_array($availableCountries)) {
-                    foreach ($availableCountries as $countryId) {
-                        if (intval($countryId) === intval($country->getId())) {
-                            return true;
+                    if (is_array($availableCountries)) {
+                        foreach ($availableCountries as $countryId) {
+                            if (intval($countryId) === intval($country->getId())) {
+                                return true;
+                            }
                         }
                     }
                 }
